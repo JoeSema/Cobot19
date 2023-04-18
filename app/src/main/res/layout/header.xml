@@ -12,7 +12,7 @@
         android:id="@+id/title_textview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="COBOT-19 Control"
+        android:text="COBOT-19"
         android:textColor="@color/white"
         android:textSize="35sp"
         app:layout_constraintStart_toStartOf="parent"

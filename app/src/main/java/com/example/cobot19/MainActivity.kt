@@ -5,16 +5,23 @@ import android.bluetooth.BluetoothSocket
 import android.content.ContentValues.TAG
 import android.content.Intent
 import android.os.Bundle
+import android.util.JsonReader
 import android.util.Log
+import android.view.View
+import android.widget.Button
 import android.widget.ImageButton
+import android.widget.LinearLayout
+import android.widget.ScrollView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.constraintlayout.widget.ConstraintLayout
 import com.jackandphantom.joystickview.JoyStickView
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import retrofit2.*
 import java.io.IOException
 
 
@@ -25,9 +32,11 @@ class MainActivity : AppCompatActivity() {
 
 
 
-    private var bluetoothAdapter: BluetoothAdapter? = null
-    private var socket: BluetoothSocket? = null
-
+    private lateinit var joystickView: JoyStickView
+    private lateinit var buttonsLayout: LinearLayout
+    private lateinit var showJoystickButton: Button
+    private lateinit var showButtonsButton: Button
+    private lateinit var scrollView: ScrollView
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -48,11 +57,32 @@ class MainActivity : AppCompatActivity() {
         joyStickView.setOnMoveListener { angle, strength -> }
 
         val retrofit = Retrofit.Builder()
-            .baseUrl("https://192.168.18.15:3000")
+            .baseUrl("http://192.168.18.15:3000")
             .addConverterFactory(GsonConverterFactory.create())
             .build()
 
         val api = retrofit.create(ApiService::class.java)
+
+        joystickView = findViewById(R.id.joy)
+        buttonsLayout = findViewById(R.id.my_buttons)
+        showJoystickButton = findViewById(R.id.joystick_button)
+        showButtonsButton = findViewById(R.id.button_layout_button)
+        scrollView=findViewById(R.id.scroll_view)
+
+        // set click listeners for the buttons
+        showJoystickButton.setOnClickListener {
+            joystickView.visibility = View.VISIBLE
+            buttonsLayout.visibility = View.GONE
+        }
+        showButtonsButton.setOnClickListener {
+            Log.d(TAG, "showButtonsButton clicked")
+            joystickView.visibility = View.GONE
+            buttonsLayout.visibility = View.VISIBLE
+            scrollView.post { val y = buttonsLayout.y.toInt()
+                // Scroll to the top of the buttons layout
+                scrollView.scrollTo(0, y)}
+            joystickView.visibility = View.GONE
+        }
 
 
         fun sendMessage(message: String) {
@@ -105,22 +135,4 @@ class MainActivity : AppCompatActivity() {
 
 
 
-
-
-
-
-        // Set up the direction buttons
-
-
-
-
-
-    override fun onDestroy() {
-        super.onDestroy()
-        try {
-            socket?.close()
-        } catch (e: IOException) {
-            Log.e(TAG, "Error closing socket: ${e.message}")
-        }
-    }
 }
