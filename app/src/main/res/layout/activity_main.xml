@@ -12,9 +12,11 @@
 
         <include layout="@layout/header"/>
         <include layout="@layout/connect"/>
+        <include layout="@layout/features_buttons"/>
         <include layout="@layout/toggle"
             android:layout_height="50dp"
             android:layout_width="match_parent" />
+
 
 
         <ScrollView
@@ -41,5 +43,6 @@
 
             </LinearLayout>
         </ScrollView>
+
     </LinearLayout>
 </ScrollView>

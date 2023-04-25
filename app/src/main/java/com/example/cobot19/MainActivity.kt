@@ -28,6 +28,8 @@ import java.io.IOException
 private const val TAG = "com.example.cobot19.MainActivity"
 private const val REQUEST_ENABLE_BT = 1
 private const val REQUEST_PERMISSION =2
+private var communicationStrategy: CommunicationStrategy = WifiCommunicationStrategy()
+
 class MainActivity : AppCompatActivity() {
 
 
@@ -53,15 +55,9 @@ class MainActivity : AppCompatActivity() {
         val buttonBB = findViewById<ImageButton>(R.id.button_b)
         val buttonBR = findViewById<ImageButton>(R.id.button_br)
 
-        val joyStickView= findViewById<JoyStickView>(R.id.joy)
-        joyStickView.setOnMoveListener { angle, strength -> }
 
-        val retrofit = Retrofit.Builder()
-            .baseUrl("http://192.168.18.15:3000")
-            .addConverterFactory(GsonConverterFactory.create())
-            .build()
 
-        val api = retrofit.create(ApiService::class.java)
+
 
         joystickView = findViewById(R.id.joy)
         buttonsLayout = findViewById(R.id.my_buttons)
@@ -86,20 +82,28 @@ class MainActivity : AppCompatActivity() {
 
 
         fun sendMessage(message: String) {
-            val requestBody = ApiService.RequestBody(message)
-            api.sendPostRequest(requestBody).enqueue(object : Callback<ApiService.ResponseData> {
-                override fun onResponse(
-                    call: Call<ApiService.ResponseData>,
-                    response: Response<ApiService.ResponseData>
-                ) {
-                    val responseData = response.body()
-                    Log.d("Response", responseData?.response ?: "")
-                }
+            communicationStrategy.SendMessage(message)
+        }
 
-                override fun onFailure(call: Call<ApiService.ResponseData>, t: Throwable) {
-                    Log.e("Error", t.message ?: "Unknown error")
-                }
-            })
+        val joyStickView= findViewById<JoyStickView>(R.id.joy)
+        var previousDirection: String? =null
+        joyStickView.setOnMoveListener { angle, strength ->
+
+            val direction = when(angle.toInt()) {
+                in 23..67 -> "FR" // Forward-Forward
+                in 68..112 -> "FF " // Forward-Left
+                in 113..157 -> "FL" // Left-Left
+                in 158..202 -> "LL" // Backward-Left
+                in 203..247 -> "BL" // Backward-Backward
+                in 248..292 -> "BB" // Backward-Right
+                in 293..337 -> "BR" // Right-Right
+                else -> "RR" // Forward-Right
+            }
+            if (direction != previousDirection) {
+                sendMessage(direction)
+                previousDirection = direction
+            }
+
         }
 
         val btn_wifi = findViewById<ImageButton>(R.id.connect_wifi)

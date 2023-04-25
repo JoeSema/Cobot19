@@ -29,7 +29,8 @@
             android:background="@color/white"
             android:src="@drawable/bth"
             android:contentDescription="connection"
-            app:tint="@color/covid"/>
+            app:tint="@color/covid"
+            />
 
         <TextView
             android:id="@+id/status_text"
@@ -38,7 +39,7 @@
             android:layout_weight="1"
             android:text="connected"
             android:textColor="@color/covid"
-            android:textSize="20sp"
+            android:textSize="24sp"
             android:textStyle="bold" />
     </LinearLayout>
 

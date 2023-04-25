@@ -14,14 +14,15 @@
             android:id="@+id/joystick_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@color/covid"
-            android:text="Joystick" />
+            android:text="Joystick"
+            android:backgroundTint="@color/covid"/>
 
         <Button
             android:id="@+id/button_layout_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Buttons" />
+            android:text="Buttons"
+            android:backgroundTint="@color/covid"/>
 
     </LinearLayout>
 
