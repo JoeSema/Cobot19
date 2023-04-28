@@ -11,13 +11,13 @@ import java.io.IOException
 
 class WifiCommunicationStrategy : CommunicationStrategy {
     private val retrofit = Retrofit.Builder()
-        .baseUrl("http://192.168.16.6:3000")
+        .baseUrl("https://cobot-test.onrender.com")
         .addConverterFactory(GsonConverterFactory.create())
         .build()
 
     val api = retrofit.create(ApiService::class.java)
 
-    override fun SendMessage(message: String) {
+    override fun sendMessage(message: String) {
         val requestBody = ApiService.RequestBody(message)
         api.sendPostRequest(requestBody).enqueue(object : Callback<ApiService.ResponseData> {
             override fun onResponse(

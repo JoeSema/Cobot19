@@ -82,7 +82,7 @@ class MainActivity : AppCompatActivity() {
 
 
         fun sendMessage(message: String) {
-            communicationStrategy.SendMessage(message)
+            communicationStrategy.sendMessage(message)
         }
 
         val joyStickView= findViewById<JoyStickView>(R.id.joy)
