@@ -22,7 +22,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Buttons"
-            android:backgroundTint="@color/covid"/>
+            android:backgroundTint="@color/black_cyan"/>
 
     </LinearLayout>
 

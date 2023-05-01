@@ -33,7 +33,8 @@
             android:contentDescription="dvc"
             android:src="@drawable/upp"
             android:text="F"
-            android:textColor="#FFFFFF" />
+            android:textColor="#FFFFFF"
+            app:tint="@color/black_cyan"/>
 
         <ImageButton
             android:id="@+id/button_fr"

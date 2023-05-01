@@ -7,5 +7,7 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="covid">#3B88C3</color>
+    <color name="covid">#1bda76</color>
+    <color name="green_1">#1bda76</color>
+    <color name="black_cyan">#081e32</color>
 </resources>

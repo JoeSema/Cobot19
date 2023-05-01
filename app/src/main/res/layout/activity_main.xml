@@ -2,17 +2,20 @@
 <ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+
+    android:background="@drawable/gradient">
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:padding="16dp"
-        android:backgroundTint="@color/white">
+        >
 
-        <include layout="@layout/header"/>
+
         <include layout="@layout/connect"/>
         <include layout="@layout/features_buttons"/>
+
         <include layout="@layout/toggle"
             android:layout_height="50dp"
             android:layout_width="match_parent" />

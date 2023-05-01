@@ -4,7 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/covid"
+
     android:elevation="4dp"
     android:padding="8dp">
 
@@ -25,7 +25,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="4dp"
-        android:background="@color/covid"
+
         android:contentDescription="header"
         android:padding="8dp"
         android:src="@drawable/play"

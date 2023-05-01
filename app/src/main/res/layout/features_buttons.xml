@@ -16,6 +16,7 @@
 
         <Button
             android:id="@+id/button1"
+            android:text="Blue"
             android:layout_width="wrap_content"
             android:layout_height="48dp"
             android:layout_margin="20dp"
@@ -25,15 +26,17 @@
 
         <Button
             android:id="@+id/button2"
+            android:text="@string/green"
             android:layout_width="wrap_content"
             android:layout_height="48dp"
             android:layout_margin="20dp"
             android:layout_weight="1"
-            android:backgroundTint="#00FF00"
+            android:backgroundTint="@color/green_1"
             android:contentDescription="FL" />
 
         <Button
             android:id="@+id/button3"
+            android:text="RED"
             android:layout_width="wrap_content"
             android:layout_height="48dp"
             android:layout_margin="20dp"
@@ -59,10 +62,13 @@
             android:layout_height="60dp"
             android:layout_margin="20dp"
             android:layout_weight="1"
-            android:background="@color/white"
+
+
+
+            android:background="@android:color/transparent"
             android:contentDescription="FL"
             android:scaleType="fitCenter"
-            android:src="@drawable/infect"
+            android:src="@drawable/hand"
             android:text="Button 4" />
 
         <ImageButton
@@ -71,7 +77,7 @@
             android:layout_height="60dp"
             android:layout_margin="20dp"
             android:layout_weight="1"
-            android:background="@color/white"
+            android:background="@android:color/transparent"
             android:contentDescription="FL"
             android:scaleType="fitCenter"
             android:src="@drawable/beep"
