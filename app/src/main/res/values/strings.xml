@@ -1,4 +1,5 @@
 <resources>
-    <string name="app_name">COBOT-19</string>
-    <string name="green" >GREEN</string>
+    <string name="app_name">Cobot19</string>
+    <string name="open">Open</string>
+    <string name="close">Close</string>
 </resources>

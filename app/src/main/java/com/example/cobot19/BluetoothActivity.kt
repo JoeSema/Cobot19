@@ -22,22 +22,3 @@ import java.util.*
 private const val TAG = "com.example.cobot19.MainActivity"
 private const val REQUEST_ENABLE_BT = 1
 private const val REQUEST_PERMISSION =2
-class BluetoothActivity : AppCompatActivity() {
-
-
-
-
-
-
-
-
-
-
-
-
-    // Set up the direction buttons
-
-
-
-
-}

@@ -15,7 +15,7 @@
         >
 
         <Button
-            android:id="@+id/button1"
+            android:id="@+id/button_blue"
             android:text="Blue"
             android:layout_width="wrap_content"
             android:layout_height="48dp"
@@ -25,8 +25,8 @@
             android:contentDescription="FL" />
 
         <Button
-            android:id="@+id/button2"
-            android:text="@string/green"
+            android:id="@+id/button_green"
+            android:text="green"
             android:layout_width="wrap_content"
             android:layout_height="48dp"
             android:layout_margin="20dp"
@@ -35,7 +35,7 @@
             android:contentDescription="FL" />
 
         <Button
-            android:id="@+id/button3"
+            android:id="@+id/button_red"
             android:text="RED"
             android:layout_width="wrap_content"
             android:layout_height="48dp"
@@ -57,7 +57,7 @@
         android:orientation="horizontal">
 
         <ImageButton
-            android:id="@+id/button4"
+            android:id="@+id/button_p"
             android:layout_width="100dp"
             android:layout_height="60dp"
             android:layout_margin="20dp"
@@ -72,7 +72,7 @@
             android:text="Button 4" />
 
         <ImageButton
-            android:id="@+id/button5"
+            android:id="@+id/button_speaker"
             android:layout_width="100dp"
             android:layout_height="60dp"
             android:layout_margin="20dp"
