@@ -82,12 +82,12 @@ class MainActivity : AppCompatActivity(){
 
         navView.setNavigationItemSelectedListener {
             when(it.itemId){
-                R.id.nav_home ->Toast.makeText(applicationContext, "Cliked Home", Toast.LENGTH_SHORT).show()
-                R.id.nav_location ->Toast.makeText(applicationContext, "Cliked Location", Toast.LENGTH_SHORT).show()
-                R.id.nav_login ->Toast.makeText(applicationContext, "Cliked Log in", Toast.LENGTH_SHORT).show()
-                R.id.nav_rate_us ->Toast.makeText(applicationContext, "Cliked Rate Us", Toast.LENGTH_SHORT).show()
-                R.id.nav_settings ->Toast.makeText(applicationContext, "Cliked Settings", Toast.LENGTH_SHORT).show()
-                R.id.nav_share ->Toast.makeText(applicationContext, "Cliked SHare", Toast.LENGTH_SHORT).show()
+                R.id.nav_home ->Toast.makeText(applicationContext, "Clicked Home", Toast.LENGTH_SHORT).show()
+                R.id.nav_location ->Toast.makeText(applicationContext, "Clicked Location", Toast.LENGTH_SHORT).show()
+                R.id.nav_login ->showLoginPopup()
+                R.id.nav_rate_us ->Toast.makeText(applicationContext, "Clicked Rate Us", Toast.LENGTH_SHORT).show()
+                R.id.nav_settings ->Toast.makeText(applicationContext, "Clicked Settings", Toast.LENGTH_SHORT).show()
+                R.id.nav_share ->Toast.makeText(applicationContext, "Clicked SHare", Toast.LENGTH_SHORT).show()
 
             }
             true
@@ -214,9 +214,7 @@ class MainActivity : AppCompatActivity(){
             showLoginPopup()
         }
 
-        login.setOnClickListener{
-            showLoginPopup()
-        }
+
 
     }
 

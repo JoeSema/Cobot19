@@ -20,8 +20,6 @@
             android:layout_height="match_parent"
             android:padding="16dp">
 
-
-            <include layout="@layout/header"/>
             <include layout="@layout/connect"/>
             <include layout="@layout/features_buttons"/>
             <include layout="@layout/toggle"
