@@ -187,11 +187,11 @@ class MainActivity : AppCompatActivity(){
         loginPopup = Dialog(this)
         loginPopup.setContentView(R.layout.login_dialog)
         val loginButton = loginPopup.findViewById<Button>(R.id.login_button)
-        val loginEmail = loginPopup.findViewById<EditText>(R.id.email_edittext)
+        val loginUsername = loginPopup.findViewById<EditText>(R.id.email_edittext)
         val loginPassword = loginPopup.findViewById<EditText>(R.id.password_edittext)
         val signupTextView = loginPopup.findViewById<TextView>(R.id.signup_textview)
         loginButton.setOnClickListener {
-            sendLoginInfoToServer(loginEmail.text.toString(), loginPassword.text.toString())
+            sendLoginInfoToServer(loginUsername.text.toString(), loginPassword.text.toString())
             loginPopup.dismiss()
         }
         signupTextView.setOnClickListener {
@@ -232,14 +232,14 @@ class MainActivity : AppCompatActivity(){
     private fun showSignupPopup() {
         signupPopup.show()
     }
-    private val retrofit = Retrofit.Builder()
-        .baseUrl("http://192.168.16.9:3400")
+    private val retrofit1 = Retrofit.Builder()
+        .baseUrl("http://192.168.18.15:3400")
         .addConverterFactory(GsonConverterFactory.create())
         .build()
-    private fun sendLoginInfoToServer(email: String, password: String) {
-        val api = retrofit.create(ApiService::class.java)
-        val loginRequest = ApiService.LoginRequest(email, password)
-        api.loginUser(loginRequest).enqueue(object : Callback<ApiService.LoginResponse> {
+    private fun sendLoginInfoToServer(username: String, password: String) {
+        val api1 = retrofit1.create(ApiService::class.java)
+        val loginRequest = ApiService.LoginRequest(username, password)
+        api1.loginUser(loginRequest).enqueue(object : Callback<ApiService.LoginResponse> {
             override fun onResponse(call: Call<ApiService.LoginResponse>, response: Response<ApiService.LoginResponse>) {
                 val loginResponse = response.body()
                 if (loginResponse != null && loginResponse.success) {
@@ -259,7 +259,7 @@ class MainActivity : AppCompatActivity(){
     }
 
     private fun sendSignupInfoToServer(username: String, password: String) {
-        val api = retrofit.create(ApiService::class.java)
+        val api = retrofit1.create(ApiService::class.java)
         val registerRequest =
             ApiService.RegisterRequest(username, username + "@example.com", password)
         api.signup(registerRequest).enqueue(object : Callback<ApiService.RegisterResponse> {

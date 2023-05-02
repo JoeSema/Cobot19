@@ -10,7 +10,7 @@ interface ApiService {
     data class RegisterRequest(val username: String, val email: String, val password: String)
     data class RegisterResponse(val success: Boolean)
 
-    data class LoginRequest(val email: String, val password: String)
+    data class LoginRequest(val username: String, val password: String)
     data class LoginResponse(val success: Boolean)
 
     data class RequestBody(@SerializedName("message") val message: String)
