@@ -4,7 +4,9 @@ import android.app.Dialog
 import android.bluetooth.BluetoothAdapter
 import android.bluetooth.BluetoothSocket
 import android.content.ContentValues.TAG
+import android.content.Context
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.util.JsonReader
 import android.util.Log
@@ -14,6 +16,7 @@ import android.widget.*
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.drawerlayout.widget.DrawerLayout
 import com.android.volley.Request
 import com.android.volley.toolbox.JsonObjectRequest
@@ -74,6 +77,12 @@ class MainActivity : AppCompatActivity(){
         val pomp= findViewById<ImageButton>(R.id.button_p)
         val drawerLayout : DrawerLayout= findViewById(R.id.drawerLayout)
         val navView : NavigationView= findViewById(R.id.nav_view)
+        fun goToSite() {
+            val url = "https://www.usj.edu.lb/news.php?id=9819"
+            val intent = Intent(Intent.ACTION_VIEW)
+            intent.data = Uri.parse(url)
+            startActivity(intent)
+        }
 
 
         toggle= ActionBarDrawerToggle(this, drawerLayout, R.string.open, R.string.close)
@@ -95,9 +104,11 @@ class MainActivity : AppCompatActivity(){
                 R.id.nav_settings ->Toast.makeText(applicationContext, "Clicked Settings", Toast.LENGTH_SHORT).show()
                 R.id.nav_share ->Toast.makeText(applicationContext, "Clicked Share", Toast.LENGTH_SHORT).show()
 
+                R.id.nav_about_us-> goToSite()
             }
             true
         }
+
 
 
 
