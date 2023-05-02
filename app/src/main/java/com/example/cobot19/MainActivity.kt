@@ -1,5 +1,6 @@
 package com.example.cobot19
 
+import android.app.Activity
 import android.app.Dialog
 import android.bluetooth.BluetoothAdapter
 import android.bluetooth.BluetoothSocket
@@ -8,6 +9,7 @@ import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.provider.MediaStore
 import android.util.JsonReader
 import android.util.Log
 import android.view.MenuItem
@@ -23,6 +25,7 @@ import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
 import com.google.android.material.navigation.NavigationView
 import com.jackandphantom.joystickview.JoyStickView
+import de.hdodenhof.circleimageview.CircleImageView
 import org.json.JSONObject
 import retrofit2.Call
 import retrofit2.Callback
@@ -35,7 +38,7 @@ import java.io.IOException
 
 
 private const val TAG = "com.example.cobot19.MainActivity"
-private const val PICK_IMAGE_REQUEST = 1
+private const val PICK_IMAGE_REQUEST = 123
 private const val REQUEST_ENABLE_BT = 1
 private const val REQUEST_PERMISSION =2
 private var communicationStrategy: CommunicationStrategy = WifiCommunicationStrategy()
@@ -53,6 +56,8 @@ class MainActivity : AppCompatActivity(){
     private lateinit var scrollView: ScrollView
     private lateinit var loginPopup: Dialog
     private lateinit var signupPopup: Dialog
+    private lateinit var navHeader: LinearLayout
+    private lateinit var navPicture: CircleImageView
     private var macAddress: String = "C8:F0:9E:4E:2A:26"
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -76,7 +81,15 @@ class MainActivity : AppCompatActivity(){
         val red= findViewById<Button>(R.id.button_red)
         val pomp= findViewById<ImageButton>(R.id.button_p)
         val drawerLayout : DrawerLayout= findViewById(R.id.drawerLayout)
-        val navView : NavigationView= findViewById(R.id.nav_view)
+        val navView = findViewById<NavigationView>(R.id.nav_view)
+        val headerView = navView.getHeaderView(0)
+        val navPicture = headerView.findViewById<CircleImageView>(R.id.nav_picture)
+        navPicture.setOnClickListener {
+            val intent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
+            startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE_REQUEST)
+        }
+
+
         fun goToSite() {
             val url = "https://www.usj.edu.lb/news.php?id=9819"
             val intent = Intent(Intent.ACTION_VIEW)
@@ -93,17 +106,15 @@ class MainActivity : AppCompatActivity(){
 
         navView.setNavigationItemSelectedListener {
             when(it.itemId){
-                R.id.nav_picture ->{val intent = Intent()
-                intent.type = "image/*"
-                        intent.action = Intent.ACTION_GET_CONTENT
-                        startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE_REQUEST)}
+                R.id.nav_edit ->{val intent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
+                    startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE_REQUEST)}
                 R.id.nav_home ->Toast.makeText(applicationContext, "Clicked Home", Toast.LENGTH_SHORT).show()
                 R.id.nav_location ->Toast.makeText(applicationContext, "Clicked Location", Toast.LENGTH_SHORT).show()
                 R.id.nav_login ->showLoginPopup()
                 R.id.nav_rate_us ->Toast.makeText(applicationContext, "Clicked Rate Us", Toast.LENGTH_SHORT).show()
                 R.id.nav_settings ->Toast.makeText(applicationContext, "Clicked Settings", Toast.LENGTH_SHORT).show()
                 R.id.nav_share ->Toast.makeText(applicationContext, "Clicked Share", Toast.LENGTH_SHORT).show()
-
+                R.id.nav_logout ->logout()
                 R.id.nav_about_us-> goToSite()
             }
             true
@@ -241,6 +252,17 @@ class MainActivity : AppCompatActivity(){
         }
         return super.onOptionsItemSelected(item)
     }
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        if (requestCode == PICK_IMAGE_REQUEST && resultCode == Activity.RESULT_OK && data != null && data.data != null) {
+            val imageUri = data.data
+
+            // Update the nav picture with the selected image
+            val navPicture = findViewById<CircleImageView>(R.id.nav_picture)
+            navPicture.setImageURI(imageUri)
+        }
+    }
 
     private fun showLoginPopup() {
         loginPopup.show()
@@ -249,6 +271,22 @@ class MainActivity : AppCompatActivity(){
 
     private fun showSignupPopup() {
         signupPopup.show()
+    }
+    private fun logout(){
+        val navigationView = findViewById<NavigationView>(R.id.nav_view)
+        val menu = navigationView.menu
+        val usernames= findViewById<TextView>(R.id.user_name)
+        val profile= findViewById<de.hdodenhof.circleimageview.CircleImageView>(R.id.nav_picture)
+        val loginItem = menu?.findItem(R.id.nav_login)
+        val logoutItem = menu?.findItem(R.id.nav_logout)
+        val editItem =menu?.findItem(R.id.nav_edit)
+        usernames.setText("Guest")
+        profile.setImageResource(R.drawable.avatar1)
+        loginItem?.isVisible = true
+        logoutItem?.isVisible = false
+        editItem?.isVisible= false
+        Toast.makeText(this@MainActivity, "Logged out successfully!", Toast.LENGTH_SHORT).show()
+
     }
     private val retrofit1 = Retrofit.Builder()
         .baseUrl("http://192.168.18.15:3400")
@@ -262,6 +300,7 @@ class MainActivity : AppCompatActivity(){
         val api1 = retrofit1.create(ApiService::class.java)
         val loginItem = menu?.findItem(R.id.nav_login)
         val logoutItem = menu?.findItem(R.id.nav_logout)
+        val editItem =menu?.findItem(R.id.nav_edit)
         val loginRequest = ApiService.LoginRequest(username, password)
         api1.loginUser(loginRequest).enqueue(object : Callback<ApiService.LoginResponse> {
             override fun onResponse(call: Call<ApiService.LoginResponse>, response: Response<ApiService.LoginResponse>) {
@@ -269,14 +308,16 @@ class MainActivity : AppCompatActivity(){
                 if (loginResponse != null && loginResponse.success) {
                     // Login successful
                     usernames.setText(username)
-                    profile.setImageResource(R.drawable.avatar1)
+                    profile.setImageResource(R.drawable.logg)
                     loginItem?.isVisible = false
                     logoutItem?.isVisible = true
+                    editItem?.isVisible= true
                     Toast.makeText(this@MainActivity, "Logged in successfully!", Toast.LENGTH_SHORT).show()
                 } else {
                     // Login failed
                     loginItem?.isVisible = true
                     logoutItem?.isVisible = false
+                    editItem?.isVisible= false
                     Toast.makeText(this@MainActivity, "Login failed", Toast.LENGTH_SHORT).show()
                 }
             }
@@ -287,6 +328,7 @@ class MainActivity : AppCompatActivity(){
             }
         })
     }
+
 
     private fun sendSignupInfoToServer(username: String, password: String) {
         val api = retrofit1.create(ApiService::class.java)

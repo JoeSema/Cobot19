@@ -19,8 +19,7 @@
             android:background="@android:color/transparent"
             android:contentDescription="FL"
             android:scaleType="fitCenter"
-            android:src="@drawable/hand"
-            android:text="Button 4" />
+            android:src="@drawable/hand" />
 
         <ImageButton
             android:id="@+id/button_speaker"

@@ -16,7 +16,6 @@
 
         <Button
             android:id="@+id/button_blue"
-            android:text="Blue"
             android:layout_width="wrap_content"
             android:layout_height="48dp"
             android:layout_margin="20dp"
@@ -26,8 +25,7 @@
 
         <Button
             android:id="@+id/button_green"
-            android:text="green"
-            android:textSize="13sp"
+
             android:layout_width="wrap_content"
             android:layout_height="48dp"
             android:layout_margin="20dp"
@@ -37,12 +35,10 @@
 
         <Button
             android:id="@+id/button_red"
-            android:text="RED"
             android:layout_width="wrap_content"
             android:layout_height="48dp"
             android:layout_margin="20dp"
             android:layout_weight="1"
-
             android:backgroundTint="#FF0000"
             android:contentDescription="FL"
              />
