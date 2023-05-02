@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_margin="10dp"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <ImageButton
+            android:id="@+id/button_p"
+            android:layout_width="100dp"
+            android:layout_height="60dp"
+            android:layout_margin="20dp"
+            android:layout_weight="1"
+            android:background="@android:color/transparent"
+            android:contentDescription="FL"
+            android:scaleType="fitCenter"
+            android:src="@drawable/hand"
+            android:text="Button 4" />
+
+        <ImageButton
+            android:id="@+id/button_speaker"
+            android:layout_width="100dp"
+            android:layout_height="60dp"
+            android:layout_margin="20dp"
+            android:layout_weight="1"
+            app:tint="@color/white"
+            android:background="@android:color/transparent"
+            android:contentDescription="FL"
+            android:scaleType="fitCenter"
+            android:src="@drawable/baseline_volume_up_24"
+            android:text="Button 5" />
+
+        <Button
+            android:id="@+id/button6"
+            android:layout_width="wrap_content"
+            android:layout_height="48dp"
+            android:layout_margin="20dp"
+            android:layout_weight="1"
+            android:backgroundTint="#808080"
+            android:contentDescription="FL"
+            />
+
+    </LinearLayout>
+
+</LinearLayout>
