@@ -244,10 +244,13 @@ class MainActivity : AppCompatActivity(){
         .addConverterFactory(GsonConverterFactory.create())
         .build()
     private fun sendLoginInfoToServer(username: String, password: String) {
+        val navigationView = findViewById<NavigationView>(R.id.nav_view)
+        val menu = navigationView.menu
         val usernames= findViewById<TextView>(R.id.user_name)
         val profile= findViewById<de.hdodenhof.circleimageview.CircleImageView>(R.id.nav_picture)
         val api1 = retrofit1.create(ApiService::class.java)
-
+        val loginItem = menu?.findItem(R.id.nav_login)
+        val logoutItem = menu?.findItem(R.id.nav_logout)
         val loginRequest = ApiService.LoginRequest(username, password)
         api1.loginUser(loginRequest).enqueue(object : Callback<ApiService.LoginResponse> {
             override fun onResponse(call: Call<ApiService.LoginResponse>, response: Response<ApiService.LoginResponse>) {
@@ -255,11 +258,14 @@ class MainActivity : AppCompatActivity(){
                 if (loginResponse != null && loginResponse.success) {
                     // Login successful
                     usernames.setText(username)
-
-
+                    profile.setImageResource(R.drawable.avatar1)
+                    loginItem?.isVisible = false
+                    logoutItem?.isVisible = true
                     Toast.makeText(this@MainActivity, "Logged in successfully!", Toast.LENGTH_SHORT).show()
                 } else {
                     // Login failed
+                    loginItem?.isVisible = true
+                    logoutItem?.isVisible = false
                     Toast.makeText(this@MainActivity, "Login failed", Toast.LENGTH_SHORT).show()
                 }
             }

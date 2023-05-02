@@ -10,20 +10,19 @@
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/nav_picture"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:src="@drawable/play"
+        android:layout_width="80sp"
+        android:layout_height="80sp"
+        android:src="@drawable/avatar1"
         />
 
     <TextView
+        android:id="@+id/user_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/user_name"
         android:paddingTop="8dp"
-        android:textSize="20dp"
-        android:text="JoeSem"
+        android:text="Guest"
         android:textColor="@color/black"
-        android:textStyle="bold"/>
+        android:textSize="20dp" />
 
     <View
         android:layout_width="match_parent"
