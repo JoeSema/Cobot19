@@ -251,7 +251,7 @@ class MainActivity : AppCompatActivity(){
         signupPopup.show()
     }
     private val retrofit1 = Retrofit.Builder()
-        .baseUrl("http://192.168.18.15:3400")
+        .baseUrl("http://10.81.14.29:3400")
         .addConverterFactory(GsonConverterFactory.create())
         .build()
     private fun sendLoginInfoToServer(username: String, password: String) {
