@@ -9,6 +9,7 @@
     android:background="@color/white">
 
     <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/nav_picture"
         android:layout_width="60dp"
         android:layout_height="60dp"
         android:src="@drawable/play"
@@ -23,13 +24,7 @@
         android:text="JoeSem"
         android:textColor="@color/black"
         android:textStyle="bold"/>
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="16dp"
-        android:id="@+id/mail"
-        android:text="joe_semaani@hotmail.com"
-        />
+
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"

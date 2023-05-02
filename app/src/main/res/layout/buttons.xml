@@ -4,13 +4,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="64dp">
+    android:padding="28dp"
+    >
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:background="@android:color/transparent">
 
 
         <ImageButton
@@ -18,7 +20,7 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_marginEnd="8dp"
-            android:background="@color/white"
+            android:background="@android:color/transparent"
             android:contentDescription="FL"
             android:src="@drawable/lf"
             android:text="FL" />
@@ -29,18 +31,18 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_marginEnd="8dp"
-            android:background="@color/white"
+            android:background="@android:color/transparent"
             android:contentDescription="dvc"
             android:src="@drawable/upp"
             android:text="F"
             android:textColor="#FFFFFF"
-            app:tint="@color/black_cyan"/>
+            />
 
         <ImageButton
             android:id="@+id/button_fr"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@color/white"
+            android:background="@android:color/transparent"
             android:contentDescription="front right"
             android:src="@drawable/rf" />
 
@@ -51,14 +53,15 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:background="@android:color/transparent">
 
         <ImageButton
             android:id="@+id/button_l"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_marginEnd="8dp"
-            android:background="@color/white"
+            android:background="@android:color/transparent"
             android:contentDescription="left"
             android:src="@drawable/left"
             android:text="L"
@@ -69,18 +72,18 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_marginEnd="8dp"
-            android:background="@color/white"
+            android:background="@android:color/transparent"
             android:contentDescription="stop"
             android:src="@drawable/stap"
             android:text="STOP"
             android:textColor="#3B88C3"
-            app:tint="@color/covid" />
+            app:tint="@color/white" />
 
         <ImageButton
             android:id="@+id/button_r"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:background="@color/white"
+            android:background="@android:color/transparent"
             android:contentDescription="right"
             android:src="@drawable/right"
             android:text="R"
@@ -99,7 +102,7 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_marginEnd="8dp"
-            android:background="@color/white"
+            android:background="@android:color/transparent"
             android:contentDescription="back left"
             android:src="@drawable/lb"
             android:text="BL"
@@ -111,7 +114,7 @@
             android:layout_height="match_parent"
             android:layout_marginEnd="8dp"
 
-            android:background="@color/white"
+            android:background="@android:color/transparent"
             android:contentDescription="back"
             android:src="@drawable/down"
             android:text="B"
@@ -121,7 +124,7 @@
             android:id="@+id/button_br"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:background="@color/white"
+            android:background="@android:color/transparent"
             android:contentDescription="back right"
             android:src="@drawable/rb"
             android:textColor="#FFFFFF" />

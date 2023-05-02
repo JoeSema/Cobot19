@@ -7,23 +7,22 @@
     android:padding="16dp"
 
 
+
     >
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:background="@drawable/rounded_bg">
 
         <ImageButton
             android:id="@+id/connect_wifi"
             android:layout_width="0dp"
             android:layout_height="60dp"
             android:layout_weight="1"
-            android:background="@color/black_cyan"
-
-
-
-            android:src="@drawable/wifii"
+            android:background="@android:color/transparent"
+            android:src="@drawable/baseline_wifi_24"
             android:contentDescription="FL"
             app:tint="@color/white" />
 
@@ -33,10 +32,9 @@
             android:layout_width="0dp"
             android:layout_height="60dp"
             android:layout_weight="1"
-            android:background="@color/black_cyan"
-
             android:scaleType="fitCenter"
-            android:src="@drawable/bluetooth"
+            android:src="@drawable/baseline_bluetooth_24"
+            android:background="@android:color/transparent"
             android:contentDescription="connection"
             app:tint="@color/white" />
 

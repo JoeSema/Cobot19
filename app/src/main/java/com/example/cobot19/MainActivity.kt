@@ -32,6 +32,7 @@ import java.io.IOException
 
 
 private const val TAG = "com.example.cobot19.MainActivity"
+private const val PICK_IMAGE_REQUEST = 1
 private const val REQUEST_ENABLE_BT = 1
 private const val REQUEST_PERMISSION =2
 private var communicationStrategy: CommunicationStrategy = WifiCommunicationStrategy()
@@ -74,6 +75,7 @@ class MainActivity : AppCompatActivity(){
         val drawerLayout : DrawerLayout= findViewById(R.id.drawerLayout)
         val navView : NavigationView= findViewById(R.id.nav_view)
 
+
         toggle= ActionBarDrawerToggle(this, drawerLayout, R.string.open, R.string.close)
         drawerLayout.addDrawerListener(toggle)
         toggle.syncState()
@@ -82,12 +84,16 @@ class MainActivity : AppCompatActivity(){
 
         navView.setNavigationItemSelectedListener {
             when(it.itemId){
+                R.id.nav_picture ->{val intent = Intent()
+                intent.type = "image/*"
+                        intent.action = Intent.ACTION_GET_CONTENT
+                        startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE_REQUEST)}
                 R.id.nav_home ->Toast.makeText(applicationContext, "Clicked Home", Toast.LENGTH_SHORT).show()
                 R.id.nav_location ->Toast.makeText(applicationContext, "Clicked Location", Toast.LENGTH_SHORT).show()
                 R.id.nav_login ->showLoginPopup()
                 R.id.nav_rate_us ->Toast.makeText(applicationContext, "Clicked Rate Us", Toast.LENGTH_SHORT).show()
                 R.id.nav_settings ->Toast.makeText(applicationContext, "Clicked Settings", Toast.LENGTH_SHORT).show()
-                R.id.nav_share ->Toast.makeText(applicationContext, "Clicked SHare", Toast.LENGTH_SHORT).show()
+                R.id.nav_share ->Toast.makeText(applicationContext, "Clicked Share", Toast.LENGTH_SHORT).show()
 
             }
             true
@@ -160,7 +166,7 @@ class MainActivity : AppCompatActivity(){
             communicationStrategy=WifiCommunicationStrategy()
             sendMessage("wifi connection")
         }
-        val mac: String= "joe"
+
 
 
 
@@ -227,6 +233,7 @@ class MainActivity : AppCompatActivity(){
 
     private fun showLoginPopup() {
         loginPopup.show()
+
     }
 
     private fun showSignupPopup() {
@@ -237,13 +244,19 @@ class MainActivity : AppCompatActivity(){
         .addConverterFactory(GsonConverterFactory.create())
         .build()
     private fun sendLoginInfoToServer(username: String, password: String) {
+        val usernames= findViewById<TextView>(R.id.user_name)
+        val profile= findViewById<de.hdodenhof.circleimageview.CircleImageView>(R.id.nav_picture)
         val api1 = retrofit1.create(ApiService::class.java)
+
         val loginRequest = ApiService.LoginRequest(username, password)
         api1.loginUser(loginRequest).enqueue(object : Callback<ApiService.LoginResponse> {
             override fun onResponse(call: Call<ApiService.LoginResponse>, response: Response<ApiService.LoginResponse>) {
                 val loginResponse = response.body()
                 if (loginResponse != null && loginResponse.success) {
                     // Login successful
+                    usernames.setText(username)
+
+
                     Toast.makeText(this@MainActivity, "Logged in successfully!", Toast.LENGTH_SHORT).show()
                 } else {
                     // Login failed

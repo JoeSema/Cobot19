@@ -51,7 +51,9 @@
                         />
 
                 </LinearLayout>
+
             </ScrollView>
+            <include layout="@layout/features1"/>
 
         </LinearLayout>
     </ScrollView>
