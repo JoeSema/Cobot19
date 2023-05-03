@@ -58,13 +58,6 @@ class MainActivity : AppCompatActivity(){
     private lateinit var signupPopup: Dialog
     private lateinit var navHeader: LinearLayout
     private lateinit var navPicture: CircleImageView
-    val navigationView = findViewById<NavigationView>(R.id.nav_view)
-    val menu = navigationView.menu
-    val usernames= findViewById<TextView>(R.id.user_name)
-    val profile= findViewById<de.hdodenhof.circleimageview.CircleImageView>(R.id.nav_picture)
-    val loginItem = menu?.findItem(R.id.nav_login)
-    val logoutItem = menu?.findItem(R.id.nav_logout)
-    val editItem =menu?.findItem(R.id.nav_edit)
     private var macAddress: String = "C8:F0:9E:4E:2A:26"
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -82,7 +75,6 @@ class MainActivity : AppCompatActivity(){
         val buttonBL = findViewById<ImageButton>(R.id.button_bl)
         val buttonBB = findViewById<ImageButton>(R.id.button_b)
         val buttonBR = findViewById<ImageButton>(R.id.button_br)
-        val login = findViewById<ImageButton>(R.id.menu_button)
         val blue= findViewById<Button>(R.id.button_blue)
         val green= findViewById<Button>(R.id.button_green)
         val red= findViewById<Button>(R.id.button_red)
@@ -300,7 +292,14 @@ class MainActivity : AppCompatActivity(){
         .addConverterFactory(GsonConverterFactory.create())
         .build()
     private fun sendLoginInfoToServer(username: String, password: String) {
+        val navigationView = findViewById<NavigationView>(R.id.nav_view)
+        val menu = navigationView.menu
+        val usernames= findViewById<TextView>(R.id.user_name)
+        val profile= findViewById<de.hdodenhof.circleimageview.CircleImageView>(R.id.nav_picture)
         val api1 = retrofit1.create(ApiService::class.java)
+        val loginItem = menu?.findItem(R.id.nav_login)
+        val logoutItem = menu?.findItem(R.id.nav_logout)
+        val editItem =menu?.findItem(R.id.nav_edit)
         val loginRequest = ApiService.LoginRequest(username, password)
         api1.loginUser(loginRequest).enqueue(object : Callback<ApiService.LoginResponse> {
             override fun onResponse(call: Call<ApiService.LoginResponse>, response: Response<ApiService.LoginResponse>) {
